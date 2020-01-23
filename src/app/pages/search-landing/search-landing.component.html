@@ -1,0 +1,38 @@
+<div class="landingPage">
+    <div class="banner">
+        <div id="bg_0">
+            <p class="row justify-content-md-center" id="title1">Gif Search</p><br /><br />
+            <div class="example">
+                <div class="form__group">
+                    <input type="text" class="form__input" placeholder="What are you looking for?" name=" search"
+                        [(ngModel)]="searchtext">
+                    <button type="submit" (click)="search(searchtext)"><span
+                            class="glyphicon glyphicon-search"></span>Search</button></div>
+            </div><br /><br /><br /><br />
+            <p class="row justify-content-md-center" id="title2">You can search any gif with our search</p><br />
+            <p class="row justify-content-md-center" id="title3">Everything you need for your creative
+                projects.website,banners,presentations,magzines and advertisment.</p><br />
+        </div>
+    </div>
+    <div *ngIf="viewSearchReult">
+            <h3>{{title}}</h3>
+        <div class="resultSection">
+            <div class="row">
+                <div class="col-md-3 dataDiv" *ngFor="let g of listToShow">
+                    <iframe [src]="(g.embed_url) | safe" id="data"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!viewSearchReult">
+            <h3>{{title}}</h3>
+            <div class="resultSection">
+                <div class="row">
+                    <div class="col-md-3 dataDiv" *ngFor="let g of trndingGifUrl">
+                        <iframe [src]="(g.embed_url) | safe" id="data"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<app-footer></app-footer>
