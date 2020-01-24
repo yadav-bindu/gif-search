@@ -33,10 +33,15 @@ export class SearchLandingComponent implements OnInit {
     console.log(selectionValue);
     console.log(searchtext.length);
     console.log(this.viewSearchReult);
-      if (selectionValue == 'gif') {
+    if(selectionValue == 'Show All'){
+      this.title ="Plese select something from drop down";
+    }
+      else if (selectionValue == 'gif') {
+        this.title ="Gif's are below";
         this.showGif(searchtext);
       }
       else {
+        this.title ="Sticker's are below";
         this.showSticker(searchtext)
       }
     
@@ -48,6 +53,9 @@ export class SearchLandingComponent implements OnInit {
       //console.log(this.gifList.data);
       this.listToShow = this.gifList.data;
       console.log(this.listToShow);
+      if(this.listToShow.length  == 0){
+        this.title ="No Gif to show. Please try with other text.";
+      }
     });
   }
   showSticker(searchtext) {
@@ -56,6 +64,9 @@ export class SearchLandingComponent implements OnInit {
       //console.log(this.gifList.data);
       this.listToShow = this.stickerList.data;
       console.log(this.listToShow);
+      if(this.listToShow.length  == 0){
+        this.title ="No Sticker to show. Please try with other text.";
+      }
     });
   }
 
