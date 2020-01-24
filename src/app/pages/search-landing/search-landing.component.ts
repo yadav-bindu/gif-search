@@ -12,20 +12,37 @@ export class SearchLandingComponent implements OnInit {
   searchtext = '';
   gifList: any = [];
   listToShow: any = [];
-  animationUrlList : any =[];
-  viewSearchReult : boolean = false;
-  trendingGifArr :any = [];
-  trndingGifUrl : any = [];
-  title : any;
+  animationUrlList: any = [];
+  viewSearchReult: boolean = false;
+  trendingGifArr: any = [];
+  trndingGifUrl: any = [];
+  title: any;
+  selectionDropdown: any = [] = [
+    { id: 1, name: 'gif' },
+    { id: 2, name: 'sticker' }
+  ];
+  selectionValue: any = "Show All";
+  stickerList: any = [];
   constructor(public gifService: GetGifsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.showTrending();
   }
-  search(searchtext) {
+  search(selectionValue, searchtext) {
     this.viewSearchReult = true;
-    this.title = "Your search results!";
+    console.log(selectionValue);
+    console.log(searchtext.length);
     console.log(this.viewSearchReult);
+      if (selectionValue == 'gif') {
+        this.showGif(searchtext);
+      }
+      else {
+        this.showSticker(searchtext)
+      }
+    
+
+  }
+  showGif(searchtext) {
     this.gifService.getGifList(searchtext).then(data => {
       this.gifList = data;
       //console.log(this.gifList.data);
@@ -33,7 +50,16 @@ export class SearchLandingComponent implements OnInit {
       console.log(this.listToShow);
     });
   }
-  showTrending(){
+  showSticker(searchtext) {
+    this.gifService.getStickersList(searchtext).then(data => {
+      this.stickerList = data;
+      //console.log(this.gifList.data);
+      this.listToShow = this.stickerList.data;
+      console.log(this.listToShow);
+    });
+  }
+
+  showTrending() {
     console.log(this.viewSearchReult);
     this.title = "trending items!";
     this.gifService.loadTrendingGifs().then(data => {

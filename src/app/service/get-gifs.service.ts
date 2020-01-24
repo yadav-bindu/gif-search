@@ -6,8 +6,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class GetGifsService {
   GifApiURL = "https://api.giphy.com/v1/gifs/search";
+  stickerApiURL = "https://api.giphy.com/v1/stickers/search";
   TrendingGifURL = "https://api.giphy.com/v1/gifs/trending";
   gifList: any;
+  stickersList : any;
   API_Key = "1BXtg8Ss1JNjYlB2ru7NZDRdQsJ8GIsI";
 
   constructor(private http: HttpClient) { }
@@ -21,6 +23,22 @@ export class GetGifsService {
       this.http.get(this.GifApiURL, { params }).subscribe(data => {
         resolve(data);
         this.gifList = data;
+        //console.log(this.gifList.data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+  public getStickersList(searchtext) {
+    const params = new HttpParams()
+      .set('api_key', this.API_Key)
+      .set('q', searchtext)
+      .set('offset', '0')
+      .set('limit', '100');
+    return new Promise(resolve => {
+      this.http.get(this.stickerApiURL, { params }).subscribe(data => {
+        resolve(data);
+        this.stickersList = data;
         //console.log(this.gifList.data);
       }, err => {
         console.log(err);

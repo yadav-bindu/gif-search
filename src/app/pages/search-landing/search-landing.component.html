@@ -5,8 +5,17 @@
             <div class="example">
                 <div class="form__group">
                     <input type="text" class="form__input" placeholder="What are you looking for?" name=" search"
-                        [(ngModel)]="searchtext">
-                    <button type="submit" (click)="search(searchtext)"><i class="fa fa-search"></i></button>
+                        [(ngModel)]="searchtext" required>
+                    <div id="ShowAll">
+                        <select id="department" [(ngModel)]="selectionValue"
+                            class="form-control">
+                            <option *ngFor="let s of selectionDropdown" [value]="s.name">
+                                {{s.name}}
+                            </option>
+                        </select><br />
+                    </div>
+                    <button id="searchBtn" type="submit" (click)="search(selectionValue,searchtext)"><i
+                            class="fa fa-search"></i></button>
                 </div>
             </div><br /><br /><br /><br />
             <p class="row justify-content-md-center" id="title2">You can search any gif with our search</p><br />
@@ -16,7 +25,6 @@
     </div>
     <!-- banner section ends here -->
     <div *ngIf="viewSearchReult">
-        <h3>{{title}}</h3>
         <div class="resultSection">
             <div class="row">
                 <div class="col-md-3 dataDiv" *ngFor="let g of listToShow">
@@ -26,7 +34,6 @@
         </div>
     </div>
     <div *ngIf="!viewSearchReult">
-        <h3>{{title}}</h3>
         <div class="resultSection">
             <div class="row">
                 <div class="col-md-3 dataDiv" *ngFor="let g of trndingGifUrl">
