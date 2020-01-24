@@ -24,17 +24,17 @@ body{
   }
   div.example button {
     float: left;
-    width: 20%;
+    width: 10%;
     padding: 10px;
     background: #8ae1e7;
     color: #f1f1f1;
     font-size: 17px;
     border: 17px solid transparent;
-    border-radius: 0px 17px 17px 0px;
+    border-radius: 0px 9px 9px 0px;
   } 
 .form__input{
     border: 17px solid transparent;
-    border-radius: 17px 0px 0px 17px;
+    border-radius: 9px 0px 0px 9px;
 }
   .example{
     width: 60%;
